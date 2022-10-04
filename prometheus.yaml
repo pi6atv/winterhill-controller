@@ -1,0 +1,4 @@
+- labels:
+   job: drx
+- targets:
+    - localhost:9001

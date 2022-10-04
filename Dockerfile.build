@@ -1,0 +1,11 @@
+FROM --platform=linux/amd64 node:16.13.2-stretch-slim
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    wget make software-properties-common git sudo ruby ruby-dev rubygems build-essential gcc-arm-linux-gnueabi
+
+# renovate: datasource=github-tags depName=golang/go versioning=loose
+ENV GO_VERSION="go1.17.6"
+RUN wget https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz -O /go.tgz
+RUN tar -C /usr/local -xzf /go.tgz
+ENV PATH=$PATH:/usr/local/go/bin
+
+RUN gem install --no-document fpm

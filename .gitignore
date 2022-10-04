@@ -1,0 +1,7 @@
+*.deb
+.idea/
+build/
+node_modules/
+vendor/
+web/dist/
+./drx

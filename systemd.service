@@ -1,0 +1,13 @@
+[Unit]
+Description=pi6atv DRX
+StartLimitIntervalSec=1
+StartLimitBurst=1
+StartLimitAction=none
+
+[Service]
+ExecStart=/opt/pi6atv-drx/drx --config /opt/pi6atv-drx/drx.yaml
+WorkingDirectory=/opt/pi6atv-drx
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

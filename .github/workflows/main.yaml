@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - run: git fetch --prune --unshallow
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.17'
+
+      - name: install pre-requisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ruby ruby-dev rubygems build-essential gcc-arm-linux-gnueabi
+          sudo gem install --no-document fpm
+
+      - name: build debian package amd64
+        run: make test
